@@ -12,6 +12,7 @@ import { FocusScope, useFocusRing } from "@react-aria/focus";
 import { useMenu, useMenuItem, useMenuTrigger } from "@react-aria/menu";
 import { useOverlayPosition } from "@react-aria/overlays";
 import { mergeProps } from "@react-aria/utils";
+import { useHover } from "@react-aria/interactions";
 import { Popover } from "../Popover";
 import { useFocusableRef, useUnwrapDOMRef } from "@react-spectrum/utils";
 import {
@@ -23,9 +24,8 @@ import {
 import { TreeState } from "@react-stately/tree";
 import styles from "./Menu.module.css";
 import clsx from "clsx";
-import { useHover } from "@react-aria/interactions";
 
-export type SapphireMenuProps<T extends object> = AriaMenuProps<any> &
+export type SapphireMenuProps<T extends object> = AriaMenuProps<T & any> &
   MenuTriggerProps & {
     renderTrigger: (
       props: ButtonHTMLAttributes<Element> & any,
@@ -52,10 +52,10 @@ interface SubMenuItemProps<T> {
 
 function SubMenu<T>({
   state,
-  items,
-  onClose,
   onAction,
+  onClose,
   disabledKeys,
+  items,
   item,
 }: SubMenuItemProps<T>) {
   const ref = React.useRef<HTMLUListElement>(null);
